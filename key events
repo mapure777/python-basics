@@ -1,0 +1,80 @@
+import random
+import turtle
+
+pen = turtle.Turtle()
+pen1 = turtle.Turtle()
+pen2 = turtle.Turtle()
+
+pen.shape("turtle")
+pen1.shape("turtle")
+pen2.shape("turtle")
+
+#screen
+screen = turtle.Screen()
+
+pen.color("red")
+pen1.color("blue")
+pen2.color("yellow")
+
+pen1.write("start", font=("courier",30,"bold"), align = ("right"))
+
+x = int(input("Enter the steps you want for your turtle to move : "))
+
+def go_forward():
+    pen.forward()
+
+
+def go_up():
+    pen.setheading(90)
+
+
+def go_down():
+    pen.setheading(270)
+
+
+def go_right():
+    pen.setheading(360)
+
+
+def go_left():
+    pen.setheading(180)
+
+
+def on_click(x,y):
+    screen.tracer(0)
+    pen.setheading(pen.towards(x,y))
+
+    pen.goto(x,y)
+    screen.tracer(1)
+
+    print(pen.pos())
+
+
+def on_drag(x,y):
+    screen.tracer(0)
+    pen.goto(x,y)
+    screen.tracer(1)
+
+
+#linking the keys with the functions
+screen.listen()
+screen.onkey(go_forward,"space")
+screen.onkey(go_up, "w")
+screen.onkey(go_down, "s")
+screen.onkey(go_right, "d")
+screen.onkey(go_left, "a")
+
+screen.onclick(on_click)
+pen.ondrag(on_drag)
+
+pen1.goto(100,30)
+
+for x in range(100):
+    pen2.forward(100)
+    pen2.right(36)
+    pen2.backward(100)
+    pen2.forward(100)
+    pen2.right(50)
+    pen2.right(90)
+    pen2.backward(20)
+turtle.done()
