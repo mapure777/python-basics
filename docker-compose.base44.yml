@@ -1,0 +1,27 @@
+services:
+  desktop:
+    build:
+      context: .
+      dockerfile: .base44/Dockerfile
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    environment:
+      DISPLAY: ":99"
+      PYTHONUNBUFFERED: "1"
+    command: ["sh", "-ec", "exec sh /app/.base44/start.sh"]
+    restart: on-failure
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          xdpyinfo -display :99 >/dev/null 2>&1 || { echo 'Desktop display failed'; exit 1; };
+          /usr/bin/python3 -c "import socket; s=socket.create_connection(('127.0.0.1',5900),2); assert s.recv(12).startswith(b'RFB '); s.close()" || { echo 'Desktop connection failed'; exit 1; };
+          xwininfo -root -tree | grep -q 'Python Turtle demos' || { echo 'Demo launcher failed'; exit 1; };
+          curl -fsS --max-time 3 http://localhost:3000/vnc.html >/dev/null || { echo 'Preview web server failed'; exit 1; }
+      interval: 15s
+      timeout: 8s
+      retries: 3
+      start_period: 30s
