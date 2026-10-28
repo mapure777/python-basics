@@ -1,0 +1,18 @@
+dictionary = {}
+
+while True:
+    print("/nMIni Dictionary App/n")
+    print("1.Add/Update a word")
+
+    print("2. Retrieve a word's definition")
+    print("3. Delete a word")
+    
+    print("4. View all words")
+    print("5. Exit") 
+    choice = input("Choose an option (1-5): ")
+
+    if choice == "1":
+        word = input("Enter the word: ").strip()
+        definition = input("Enter the definition:")
+        dictionary[word] = definition
+        print(f"word'{word}' added/updated successfully!")
