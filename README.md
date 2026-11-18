@@ -1,22 +1,21 @@
-my_dict = {"apple": "a fruit", "book": "a set of written or printed pages"}
-print(my_dict, '/n')
+# Create and Open file in write mode
+file=open("example.txt","w")
 
-#adding a new key value pair
+# Write to the file
+file.write("Hello, Ektoras\n")
+file.write("This is a smaple file.")
+file.write("how r u doing.")
+# Close the file 
+file.close()
 
-my_dict ["car"] = " a vehicle"
-print(my_dict,'/n')
+# Open file in read mode
+file = open("example.txt", "r")
 
-#deleting an item
+# Read the entire content of the file
+content = file.read()
+print("File Content:\n" + content)
+File = open("example.txt")
 
-my_dict["apple"] = "a sweet fruit"
-print(my_dict, '/n')
+# Read the entire content of the file
 
-#deleting an item
-
-del my_dict["book"]
-print(my_dict, '/n')
-
-#removing an item
-
-my_dict.pop("car")
-print(my_dict, '/n')
+content = file.read
